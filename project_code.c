@@ -1,118 +1,124 @@
+/*
+author : Shubham Anil Khangar
+std    : Third year B.Sc in Electronics Science 
+college: fergusson College Pune
+date   : 05 jan 2022 
+*/
+
+
 #include<DHT.h>
 #include<ThingSpeak.h>
 #include<ESP8266HTTPClient.h>
 #include<ESP8266WiFi.h>
 
-WiFiClientClient;
-HTTPClienthttp;
-DHTdht(D1,DHT11);
+WiFiClient Client;
+HTTPClient http;
+DHT dht(D1,DHT11);
 
-Intfield1=1;
-Intfield2=2;
-Intfield3=3;
-Intfield6=6;
-Intctr1=0;
-Intctr2=0;
-Intctr3=0;
-Intctr4=0;
-StringcommandID;
-Stringresult;
-Stringresponse;
-String
-url=http://api.thingspeak.com/update?api_key=6UPLE80J6C5EV9LA&fie
-ld;
-StringurL;
+int field1=1;
+int field2=2;
+int field3=3;
+int field6=6;
+int ctr1=0;
+int ctr2=0;
+int ctr3=0;
+int ctr4=0;
+String commandID;
+String result;
+String response;
+String url="http://api.thingspeak.com/update?api_key=6UPLE80J6C5EV9LA&field";
+String urL="http://api.thingspeak.com/talkbacks/44825/commands/26209469.json?api_key=RFGE9MLL0NI0YJF5";
 
-urL=”http://api.thingspeak.com/talkbacks/44825/commands/26209469.
-json?api_key=RFGE9MLL0NI0YJF5”;
+void connectToWiFi(void);
 
-voidconnectToWiFi(void);
-
-voidsetup(){
+void setup()
+{
 Serial.begin(9600);
 pinMode(D2,OUTPUT);//sumersiblepump
 pinMode(D3,OUTPUT);//currentfencingunit
 pinMode(D4,OUTPUT);//sirenunit
 pinMode(D5,OUTPUT);//indicatorlightonoroff
-
-connectToWiFi();
-
+connectToWiFi();   //function to connect to wifi
 delay(200);
 dht.begin();
 delay(1000);
-
 }
 
-Voidloop(){
-StringcommandID=GET_command();
+void loop()
+{
+String commandID = GET_command();
 Serial.println(commandID);
-If(commandID==”L1”){
-Ctr2=1;
-Ctr3=1;
-
-digitalWrite(D5,LOW);//INDICATINGSYSTEMISON
+if(commandID == "L1")
+{
+ctr2=1;
+ctr3=1;
+digitalWrite(D5,LOW);//INDICATING SYSTEM IS ON
 TEMP_HUMD();
 }
 
-If(commandID==”L2”){
-Ctr1=1;
-Ctr3=1;
+else if(commandID == "L2")
+{
+ctr1=1;
+ctr3=1;
 digitalWrite(D5,LOW);//INDICATINGSYSTEMISON
 wateringSystem();//wateringsystem
 }
 
-Elseif(commandID==”L3”){
-Ctr1=1;
-Ctr2=1;
-digitalWrite(D5,LOW);//INDICATINGSYSTEMISON
-currentFencing();//fencingunit
+else if(commandID == "L3")
+{
+ctr1=1;
+ctr2=1;
+digitalWrite(D5,LOW);//INDICATING SYSTEM IS ON
+currentFencing();//fencing unit
 }
 
-Else{
-Serial.println(“######systemiscurrentlyoff######”);
-Serial.println(“####stationiswaitingforcommand#####”);
-Ctr1=1;
-Ctr2=1;
-Ctr3=1;
+else
+{
+Serial.println("system is currently off");
+Serial.println("station is waiting for command");
+ctr1=1;
+ctr2=1;
+ctr3=1;
 digitalWrite(D2,LOW);
 digitalWrite(D3,LOW);
-
 digitalWrite(D4,LOW);
-digitalWrite(D5,high);//indicatingsystemisoff
+digitalWrite(D5,HIGH);//indicating system is off
 delay(30000);
 }
+
 }
 
-VoidTEMP_HUMD(){
-intx=0;
+void TEMP_HUMD()
+{
+int x=0;
 digitalWrite(D3,LOW);
 digitalWrite(D4,LOW);
 digitalWrite(D2,LOW);
-intfield1=1;
-intfield2=2;
-floath=dht.readHumidity();
-floatt=dht.readTemperature();
-Serial.println(“HUMIDITY:”+(String)h);
-Serial.println(“TEMPERATURE:”+(String)t);
-X=GET_request(field2,t);
-If(x>0){
-Serial.println(“*****tempraturedatasenntsuccusesfully”);
-For(ctr1;ctr1<2;ctr1++){
-Intfield5=5;
-floatconfoData1=10;
+int field1=1;
+int field2=2;
+float h=dht.readHumidity();
+float t=dht.readTemperature();
+Serial.println("HUMIDITY:"+(String)h);
+Serial.println("TEMPERATURE:"+(String)t);
+x=GET_request(field2,t);
+if(x>0){
+Serial.println("temprature data sent succusesfully");
+for(ctr1;ctr1<2;ctr1++){
+int field5=5;
+float confoData1=10;
 GET_request(field5,confoData1);
-Delay(500);
+delay(500);
 }
+}
+else{Serial.println("errorinsendingtemp.data");
+}
+delay(1000);
 }
 
-Else{Serial.println(“!!!!!errorinsendingtemp.data”);
-}
-Delay(1000);
-}
-
-VoidwateringSystem(){
-inty=0;intfield3=3;
-floatsoil_data;
+void wateringSystem()
+{
+int y=0; int field3=3;
+float soil_data;
 digitalWrite(D3,LOW);
 digitalWrite(D4,LOW);
 digitalWrite(D2,HIGH);
@@ -121,85 +127,89 @@ delay(200);
 y=GET_request(field3,soil_data);
 delay(100);
 if(y>0){
-Serial.println(“*****soildatasentsuccesfully”);
-Delay(3000);
-For(ctr2;ctr2<2;ctr2++){
-Intfield6=6;
-floatconfoData2=50;
+Serial.println("soildatasentsuccesfully");
+delay(3000);
+for(ctr2;ctr2<2;ctr2++){
+int field6=6;
+float confoData2=50;
 GET_request(field6,confoData2);
-Delay(500);
+delay(500);
 }
 }
 
-Else{
-Serial.println(“!!!!!errorinsendingthesoildata”);
+else{
+Serial.println("error in sending the soil data");
 }
-Delay(1000);
+delay(1000);
 }
 
-VoidcurrentFencing(){
+void currentFencing()
+{
 digitalWrite(D2,LOW);
 digitalWrite(D3,HIGH);
 digitalWrite(D4,HIGH);
 for(ctr3;ctr3<2;ctr3++){
-intfield6=6;
-floatconfoData3=100;
+int field6=6;
+float confoData3=100;
 GET_request(field6,confoData3);
 }
-
-Delay(1000);
+delay(1000);
 }
-StringGET_command(){
-Inthttpcode;
-Intindex_start;
+
+//function to get talkback id
+String GET_command()
+{
+int httpcode;
+int index_start;
 http.begin(Client,urL);
 httpcode=http.GET();
 if(httpcode>0){
-Serial.println(“datafromtalkbackreadedsuccesfully”);
-Response=http.getString();
+Serial.println("data from talk back readed succesfully");
+response=http.getString();
 Serial.println(response);
 
-Intindex_start=response.indexOf(“command_string\”:\””)+17;
-Result=response.substring(index_start,index_start+2);
+int index_start=response.indexOf("command_string\":\"")+17;
+result=response.substring(index_start,index_start+2);
 }
 
-Else{
-Serial.println(“failedtoconnecttoserver”);
+else{
+Serial.println("failed to connect to server");
 }
 http.end();
-returnresult;
+return result;
 }
-IntGET_request(intfldno,floatdata){
-Inthttpcode1;
-Intg;
+
+int GET_request(int fldno,float data){
+int httpcode1;
+int G;
 url=url+fldno;
-url=url+”=”;
+url=url+"=";
 url=url+data;
 http.begin(Client,url);
-Serial.println(“watingforresponse”);
-Httpcode1=http.GET();
-If(httpcode1>0){
+Serial.println("wating for response");
+httpcode1=http.GET();
+if(httpcode1>0){
 G=1;
-Serial.println(“GETreq.datasentsuccesfuly”);
+Serial.println("GETreq. data sent succesfuly");
 }
-Else{
+else{
 G=0;
-Serial.println(“errorinGETreq.updatedatamsg”);
-
+Serial.println("error in GETreq. update data");
 }
 http.end();
-returng;
+return G;
 delay(1000);
 }
-VoidconnectToWiFi(){
+
+void connectToWiFi(){
 WiFi.mode(WIFI_STA);
-WiFi.begin(“shubham”,”87654321”);
-Serial.println(“connectingtowifi”);
-While(WiFi.status()!=WL_CONNECTED){
-Serial.println(“.....searchingforinternet”);
+WiFi.begin("shubham","87654321");
+Serial.println("connecting to wifi");
+while(WiFi.status()!=WL_CONNECTED){
+Serial.println(".....searching for internet");
 }
 Serial.println();
-Serial.println(“nodemcuisconnectedtointernetsuccsesfully”);
+Serial.println("nodemcu is connected to internet succsesfully");
 Serial.println(WiFi.localIP());
-Delay(1000);
+delay(1000);
 }
