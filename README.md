@@ -5,5 +5,6 @@ in these project the esp developent board is used specifically esp8266 a microco
 the farmer can make request to the server using the IFTTT application to controll the farm motors and other stuff's such as the fencing unit and sound system unit to protect the yield crops from the wild animals.
 
 Hardware: ESP8266, temprature and humidity sensor, relay switches, indicator led's
+
 Software: Arduino ide, IFTTT, thingspeak, postman api
 
