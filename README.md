@@ -6,14 +6,11 @@ ESP8266 (NodeMCU) is connected to the internet via the ESP-12F WIFI module prese
 
 # Working Methodology of the Project
 
-The IFTTT Android Application installed on the farmers mobile will make the HTTP request to the ThingSpeak Server for specified audio command. when such audio command is executed  using Google Assistance, WEBHOOCK inside IFTTT app triggers the HTTP request this request updates the talkback command of the thingspeak talkback services. MCU is constantally fetching this commands from   
+The IFTTT Android Application installed on the farmers mobile will make the HTTP request to the ThingSpeak Server for a specified audio command. When such an audio command is executed using Google Assistance, WEBHOOCK inside the IFTTT app triggers an HTTP request. This request updates the talkback command of the Thingspeak talkback services. MCU is constantly fetching these commands from the server by sending an HTTP GET request.
 
+Depending on the command, the MCU performs the tasks of controlling the current fencing and water supply motor unit and sending the data to the server. The Thingspeak server is programmed to perform the specific service task whenever any specified condition occurs. specific service, such as HTTPREQUEST, it will make an HTTP request to the IFTTT server, and then the IFTTT server will send the specified message to the farmers android application.
 
-
-
-
-
-
+These messages give information about the on-off states of the farms, the different units, and the sensor data.
 
 
 
