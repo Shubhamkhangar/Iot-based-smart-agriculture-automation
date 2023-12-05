@@ -1,8 +1,8 @@
 /*
 author : Shubham Anil Khangar
-std    : Third year B.Sc in Electronics Science 
-college: fergusson College Pune
-date   : 05 jan 2022 
+STD    : Third-year B.Sc. in Electronics Science 
+College: Fergusson College Pune
+date   : 5 January 2022 
 */
 
 
