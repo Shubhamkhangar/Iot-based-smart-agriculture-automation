@@ -1,6 +1,6 @@
 # IoT-based Agriculture Automation system
 
-[![Build Status](https://img.shields.io/travis/Shubhamkhangar/IoT-based-Agriculture-Automation-system.svg)](https://travis-ci.org/username/repo)
+[![Build Status](https://img.shields.io/travis/Shubhamkhangar/IoT-based-Agriculture-Automation-system.svg)](https://travis-ci.org/Shubhamkhangar/IoT-based-Agriculture-Automation-system)
 
 
 
