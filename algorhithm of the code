@@ -1,8 +1,0 @@
- Start the process
- Connect to wifi for internet access
- SendHTTP:GETrequest to read data from talkback at position1
- Execute the operation depending on the data received from server
- If system is on then send confirmation message to farmers ifttt application
- If system is off them send confirmation message to farmers ifttt application
- Update the data of sensor to their respective channel field
- Repeat steps 3 to 7
