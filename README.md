@@ -12,6 +12,10 @@ Depending on the command, the MCU performs the tasks of controlling the current 
 
 These messages give information about the on-off states of the farm's different units and the sensor data.
 
+#Click on below buttons to jump to specific folders where the code are stored.
+
+[![Static Badge](https://img.shields.io/badge/Code-blue)](code.c)
+
 
 
 # Software
