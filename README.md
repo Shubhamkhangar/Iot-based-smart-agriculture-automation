@@ -18,14 +18,11 @@
 
 
 
-**Software**
-![Static Badge](https://img.shields.io/badge/ThingSpeak-green)![Static Badge](https://img.shields.io/badge/IFTTT-violet)![Static Badge](https://img.shields.io/badge/Google_Assistance-red)![Static Badge](https://img.shields.io/badge/Arduino_IDE-blue)![Static Badge](https://img.shields.io/badge/Postman-orange)
+**Software**  ![Static Badge](https://img.shields.io/badge/ThingSpeak-green)![Static Badge](https://img.shields.io/badge/IFTTT-violet)![Static Badge](https://img.shields.io/badge/Google_Assistance-red)![Static Badge](https://img.shields.io/badge/Arduino_IDE-blue)![Static Badge](https://img.shields.io/badge/Postman-orange)
 
 
 
-**Hardware**
-  
-  ![Static Badge](https://img.shields.io/badge/ESP8266-blue)![Static Badge](https://img.shields.io/badge/DHT11-red)![Static Badge](https://img.shields.io/badge/Current_Fencing_Unit-yellow)
+**Hardware**  ![Static Badge](https://img.shields.io/badge/ESP8266-blue)![Static Badge](https://img.shields.io/badge/DHT11-red)![Static Badge](https://img.shields.io/badge/Current_Fencing_Unit-yellow)
 
 
 
